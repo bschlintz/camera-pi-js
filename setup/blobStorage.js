@@ -1,4 +1,4 @@
-var config = require('./app/config');
+var config = require('../app/config');
 var azure = require('azure-storage');
 var _svc = null;
 

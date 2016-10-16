@@ -1,2 +1,4 @@
-require('./blobStorage').setup();
-require('./serviceBus').setup();
+exports.setup = function(){
+    require('./blobStorage').setup();
+    require('./serviceBus').setup();
+};

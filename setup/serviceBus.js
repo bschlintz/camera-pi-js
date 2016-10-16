@@ -1,4 +1,4 @@
-var config = require('./app/config');
+var config = require('../app/config');
 var azure = require('azure');
 var _svc = null;
 
@@ -9,8 +9,8 @@ var _deleteDefaultRule = function(topicName, subName) {
 var _handleError = function(error){
     error && console.log(error);
 }
-var _createRule = function(topicName, subName, filterExpr) {
-    _svc.createRule(topicName, subName, subName + '-filter', { sqlExpressionFilter: filterExpr }, _handleError);
+var _createRule = function(topicName, subName, filterName, filterExpr) {
+    _svc.createRule(topicName, subName, filterName, { sqlExpressionFilter: filterExpr }, _handleError);
 }
 
 exports.setup = function(){
@@ -22,19 +22,20 @@ exports.setup = function(){
     _svc.createTopicIfNotExists(config.serviceBusTopicName, topicOptions, function(error){
         if(!error){
             console.log('topic created: ' + config.serviceBusTopicName)
+
+            //Create Subscriptions for each room 
+            config.serviceBusTopicSubscriptions.forEach(function(subName){
+                _svc.createSubscription(config.serviceBusTopicName, subName, function (error){
+                    if(!error){
+                        console.log('subscription created: ' + subName);
+                        //Remove Default Rule
+                        _deleteDefaultRule(config.serviceBusTopicName, subName);
+
+                        // Create Room Filter Rule
+                        _createRule(config.serviceBusTopicName, subName, 'room-filter', "room = '" + subName + "'");
+                    }
+                });
+            });
         }
-    });
-
-    //Create Subscriptions for each room 
-    config.serviceBusTopicSubscriptions.forEach(function(subName){
-        _svc.createSubscription(config.serviceBusTopicName, subName, function (error){
-            if(!error){
-                //Remove Default Rule
-                _deleteDefaultRule(config.serviceBusTopicName, subName);
-
-                // Create Room Filter Rule
-                _createRule(config.serviceBusTopicName, subName, 'room == ' + subName);
-            }
-        });
     });
 }

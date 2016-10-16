@@ -1,9 +1,6 @@
-var server = require('./app/server');
-var camera = require('./app/camera');
-var upload = require('./app/upload');
-var watcher = require('./app/watcher');
-// server.Start();
-// camera.takePicture();
-// upload.UploadPicture("C:\\dev\\git-me\\iot\\camera-pi-js\\SamplePic.jpg");
+// var setup = require('./setup').setup();
+// var mock = require('./mock/messenger');
+// mock.sendPictureRequest('mke-room1');
 
-watcher.checkForRequests();
+var watcher = require('./app/watcher');
+watcher.checkForRequests(true);
