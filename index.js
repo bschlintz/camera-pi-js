@@ -3,4 +3,4 @@
 // mock.sendPictureRequest('mke-room1');
 
 var watcher = require('./app/watcher');
-watcher.checkForRequests(true);
+watcher.checkForRequests(true, 5000);

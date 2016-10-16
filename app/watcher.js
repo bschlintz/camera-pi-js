@@ -2,7 +2,6 @@ var config = require('./config');
 var azure = require('azure');
 var camera = require('./camera');
 
-var pollFreqMs = 1000;
 var opts = {
     timeoutIntervalInS: 10,
     isPeekLock: true
@@ -40,7 +39,7 @@ var _checkForMessages = function(){
     });
 }
 
-Watcher.checkForRequests = function(isPoll){
+Watcher.checkForRequests = function(isPoll, pollFreq){
     if (!Watcher._serviceBus){
         _init();
     }
@@ -48,7 +47,7 @@ Watcher.checkForRequests = function(isPoll){
     _checkForMessages();
     
     if (isPoll) {
-        setInterval(_checkForMessages, pollFreqMs);
+        setInterval(_checkForMessages, pollFreq);
     }
 }
 
