@@ -28,10 +28,10 @@ var _checkForMessages = function(){
             // Message received and locked
             console.log('received message:' + lockedMessage);
 
-            // camera.takePicture(function(){
-            //     _closeMessage(lockedMessage);
-            // });
-            _closeMessage(lockedMessage);            
+            camera.takePicture(function(){
+                _closeMessage(lockedMessage);
+            });
+            // _closeMessage(lockedMessage);            
             
         } else {
             console.log(error);
