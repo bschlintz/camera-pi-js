@@ -1,6 +1,6 @@
 var express = require('express');
 var app = express();
-var watcher = require('./app/watcher');
+var watcher = require('./watcher');
 
 app.post('/', function (req, res) {
     res.send('POST received!');
