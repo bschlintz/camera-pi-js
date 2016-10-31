@@ -11,6 +11,7 @@
   "dependencies": {
     "azure": "^1.2.0-preview",
     "azure-storage": "^1.3.1",
+    "droopy-iot": "^2.0.1",
     "express": "^4.14.0",
     "moment": "^2.15.1",
     "node-uuid": "~1.4.0",
