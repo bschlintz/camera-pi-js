@@ -1,5 +1,5 @@
 var middlewarify = require('../middlewarify');
-var camera = require('./camera'); 
+var camera = require('../pi-cam'); 
 var blobStorage = require('./blobStorage');
 
 

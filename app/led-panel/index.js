@@ -9,6 +9,13 @@ ledPanel.leds = {
     RED: 13
 }
 
+ledPanel.showColor = function(color) {
+    // turn off everything
+    Object.keys(ledPanel.leds).forEach(key => ledPanel.toggle(ledPanel.leds[key], false));
+    // show the target color
+    ledPanel.toggle(ledPanel.leds[color], true);
+};
+
 ledPanel.toggle = function(pin, state) {
     console.log(`LED: ${pin}  STATE: ${state === undefined ? "toggle" : state}`);
     var led = _leds[pin];
